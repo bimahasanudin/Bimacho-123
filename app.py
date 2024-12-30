@@ -7,7 +7,7 @@ import time
 
 """connection = connector.connect(
     user='rentalmobil',
-    password='Rentalmobil123',
+    password='Rental123',
     host='fprentalmobil.mysql.database.azure.com',
     port='3306',
     database='fp_rentalmobil'
@@ -15,7 +15,7 @@ import time
 connection = mysql.connector.connect(
     host='fprentalmobil.mysql.database.azure.com',  # Replace with your Azure MySQL host
     user='rentalmobil',  # Replace with your Azure MySQL username
-    password='rentalmobil123',  # Replace with your Azure MySQL password
+    password='Rental123',  # Replace with your Azure MySQL password
     database='fp_rentalmobil',  # Replace with your Azure MySQL database name
     port='3306'  # Ensure this path is correct
 )
@@ -28,7 +28,7 @@ def get_db_connection():
         connection = mysql.connector.connect(
             host=('fprentalmobil.mysql.database.azure.com'),
             user=('rentalmobil'),
-            password=('rentalmobil123'),
+            password=('Rental123'),
             database=('fp_rentalmobil'),
             port='3306'
         )
