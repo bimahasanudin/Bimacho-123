@@ -10,10 +10,7 @@ app.secret_key = 'rodip'
 
 #konek ke database
 db = connector.connect(
-    host = 'localhost',
-    user = 'root',
-    passwd = "",
-    database= 'fp_rentalmobil'
+    user="rentalmobil", password="Rental123", host="rentalmobil.mysql.database.azure.com", port=3306, database="fp_rentalmobil"
 )
 if db.is_connected():
     print('berhasil konek ke database')
