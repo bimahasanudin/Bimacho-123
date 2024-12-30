@@ -15,7 +15,7 @@ import time
 connection = mysql.connector.connect(
     host='fprentalmobil.mysql.database.azure.com',  # Replace with your Azure MySQL host
     user='rentalmobil',  # Replace with your Azure MySQL username
-    password='rentalmobil',  # Replace with your Azure MySQL password
+    password='rentalmobil123',  # Replace with your Azure MySQL password
     database='fp_rentalmobil',  # Replace with your Azure MySQL database name
     port='3306'  # Ensure this path is correct
 )
@@ -40,13 +40,6 @@ def get_db_connection():
 app = Flask (__name__)
 
 app.secret_key = 'rodip'
-
-#konek ke database
-db = connector.connect(
-    user="rentalmobil", password="Rental123", host="rentalmobil.mysql.database.azure.com", port=3306, database="fp_rentalmobil"
-)
-if db.is_connected():
-    print('berhasil konek ke database')
 
 #halaman awal
 @app.route('/')
