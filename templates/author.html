@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About the Author</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="author-container">
+        <h1>About the Author</h1>
+        <div class="author-card">
+            <!-- Foto Penulis -->
+            <img src="{{ url_for('static', filename='images/author.jpg') }}" alt="Author Photo" class="author-photo">
+            <!-- Nama Penulis -->
+            <h2 class="author-name">Nama Penulis</h2>
+            <!-- Deskripsi Penulis -->
+            <p class="author-description">
+                Halo! Saya adalah pengembang proyek Rental Mobil ini. Proyek ini bertujuan untuk meningkatkan efisiensi 
+                manajemen rental mobil. Terima kasih telah menggunakan aplikasi ini!
+            </p>
+        </div>
+    </div>
+</body>
+</html>

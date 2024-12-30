@@ -1,0 +1,155 @@
+{%extends "base.html"%} {%block title%} Keranjang {%endblock%} {%block konten%}
+{% if 'email' in session %} {%include "navbaruser.html"%} {%else%} {%include
+"navbar.html"%} {%endif%}
+<div class="bg-second w-100">
+  <div class="container w-80">
+    <div>
+      <table class="table">
+        <thead class="table-dark">
+          <tr>
+            <th>Merk</th>
+            <th>Biaya Sewa Mobil Per Hari</th>
+            <th>Driver</th>
+            <th>Biaya Sewa Driver Per Hari</th>
+            <th>Total Sewa Per Hari</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in keranjang_item %}
+          <tr>
+            <td>{{ row[1] }}</td>
+            <td>{{ row[2] }}</td>
+            <td>
+              {% if not row[3] %}
+              <a
+                class="nav-link bg-third text-first poppins-semibold py-1"
+                href="#"
+                data-bs-toggle="modal"
+                data-bs-target="#loginModal{{ row[0] }}"
+                >Tambah Driver</a
+              >
+              <!-- Form Modal -->
+              <div
+                class="modal fade"
+                id="loginModal{{ row[0] }}"
+                tabindex="-1"
+                aria-labelledby="loginModalLabel{{ row[0] }}"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="loginModalLabel{{ row[0] }}">
+                        Tambah driver
+                      </h5>
+                      <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      ></button>
+                    </div>
+                    <div class="modal-body">
+                      <form
+                        action="{{ url_for('keranjang') }}"
+                        method="POST"
+                        enctype="multipart/form-data"
+                      >
+                        <input
+                          type="hidden"
+                          name="id_order"
+                          value="{{ row[0] }}"
+                        />
+                        <div class="mb-3">
+                          <label
+                            class="mb-2"
+                            for="driver{{ row[0] }}"
+                            class="control-label"
+                            >Driver</label
+                          >
+                          <select
+                            name="driver"
+                            id="driver{{ row[0] }}"
+                            class="form-control border-1 border-black"
+                          >
+                            <option value="">None</option>
+                            {% for drv in drivers %}
+                            <option class="text-black" value="{{ drv[0] }}">
+                              Rp {{drv[2]}}/hari --- {{drv[3]}} --- {{ drv[1] }}  
+                            </option>
+                            {% endfor %}
+                          </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                          Tambah Driver
+                        </button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% else %} {{ row[3] }} {% endif %}
+            </td>
+            <td>{{ row[4] }}</td>
+            <td>{{ row[2] + row[4] }}</td>
+            <td>
+              <a
+                href="/keranjang/hapus/{{ row[0] }}"
+                class="btn btn-danger"
+                onclick="return confirm('yakin akan menghapus {{ row[1] }} ?')"
+                >Hapus</a
+              >
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <form action="{{url_for('pesanan')}}" method="POST">
+        <div class="mb-3">
+          <label for="startDate" class="form-label">Pilih Tanggal Mulai</label>
+          <input
+            type="date"
+            class="form-control"
+            id="startDate"
+            name="tanggal_mulai"
+            placeholder="Pilih tanggal"
+            autocomplete="off"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="duration" class="form-label">Durasi (Hari)</label>
+          <input
+            type="text"
+            class="form-control"
+            id="duration"
+            name="durasi"
+            placeholder="Masukkan durasi dalam hari"
+            min="1"
+          />
+        </div>
+        <button type="submit" class="btn bg-third poppins-semibold">
+          Buat Pesanan
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script
+  type="text/javascript"
+  src="{{ url_for('static', filename='js/admin_script.js') }}"
+></script>
+<!-- script -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+          {% for category, message in messages %}
+              swal("berhasil!", "{{ message }}", "{{ category }}");
+          {% endfor %}
+      {% endif %}
+  {% endwith %}
+</script>
+<!-- end -->
+{%endblock%}
