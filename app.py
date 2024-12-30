@@ -4,6 +4,39 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
 import os
 import time
+
+"""connection = connector.connect(
+    user='rentalmobil',
+    password='Rentalmobil123',
+    host='fprentalmobil.mysql.database.azure.com',
+    port='3306',
+    database='fp_rentalmobil'
+)"""
+connection = mysql.connector.connect(
+    host='fprentalmobil.mysql.database.azure.com',  # Replace with your Azure MySQL host
+    user='rentalmobil',  # Replace with your Azure MySQL username
+    password='rentalmobil',  # Replace with your Azure MySQL password
+    database='fp_rentalmobil',  # Replace with your Azure MySQL database name
+    port='3306'  # Ensure this path is correct
+)
+
+if connection.is_connected():
+    print('Connected to MySQL Database')
+
+def get_db_connection():
+    try:
+        connection = mysql.connector.connect(
+            host=('fprentalmobil.mysql.database.azure.com'),
+            user=('rentalmobil'),
+            password=('rentalmobil123'),
+            database=('fp_rentalmobil'),
+            port='3306'
+        )
+        return connection
+    except Error as e:
+        print(f"Error: {e}")
+        return None
+
 app = Flask (__name__)
 
 app.secret_key = 'rodip'
