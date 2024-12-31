@@ -8,7 +8,7 @@ import time
 """connection = connector.connect(
     user='rentalmobil',
     password='Rental123',
-    host='fprentalmobil.mysql.database.azure.com',
+    host='rentalmobil.mysql.database.azure.com',
     port='3306',
     database='fp_rentalmobil'
 )"""
